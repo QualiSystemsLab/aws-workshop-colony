@@ -1,0 +1,19 @@
+{
+  "name": "integration-tests",
+  "version": "1.0.0",
+  "description": "Integration tests for promotions manager ",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "test:ci": "mocha --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-output/test-results.xml"
+  },
+  "author": "Alex Az @ QualiLabs",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "mocha": "^5.2.0",
+    "mocha-junit-reporter": "^1.18.0"
+  }
+}

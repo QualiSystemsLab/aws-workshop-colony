@@ -1,0 +1,33 @@
+{
+  "name": "promotions-manager-api",
+  "version": "0.0.1",
+  "description": "promotions manager api",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "test:ci": "mocha --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-output/test-results.xml",
+    "start": "node index.js"
+  },
+  "author": "Alex Azarh",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mongodb": "^3.5.4",
+    "morgan": "^1.9.1",
+    "morgan-body": "^2.4.5",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "request": "^2.88.0",
+    "underscore": "^1.9.1",
+    "validator": "^10.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "mocha-junit-reporter": "^1.18.0"
+  }
+}

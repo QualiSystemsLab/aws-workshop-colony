@@ -1,0 +1,56 @@
+{
+  "name": "promotions-manager-ui",
+  "version": "0.0.1",
+  "private": true,
+  "proxy": "http://localhost:3001",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "react": "^16.7.0",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.7.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.2",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "universal-cookie": "^3.0.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "test:ci": "react-scripts test --env=jsdom --testResultsProcessor=\"jest-junit\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@babel/runtime": "^7.2.0",
+    "chai": "^4.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "expect": "^23.6.0",
+    "jest-junit": "^5.2.0",
+    "jsdom": "^13.2.0",
+    "mocha": "^5.2.0",
+    "react-addons-test-utils": "^15.6.2",
+    "redux-immutable-state-invariant": "^2.1.0",
+    "sinon": "^7.5.0"
+  },
+  "jest": {},
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "output": "test/junit.xml",
+    "classNameTemplate": "{classname} - {title}",
+    "titleTemplate": "{classname} - {title}",
+    "ancestorSeparator": " > ",
+    "usePathForSuiteName": "true"
+  }
+}

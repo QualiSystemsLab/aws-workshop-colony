@@ -1,0 +1,34 @@
+spec_version: 1
+kind: TerraForm
+
+inputs:
+  - REGION: us-east-1
+  - ROLE_ARN: PowerUserAccess
+  - ADD_ADMIN_USER: true
+  - USERNAME: 
+  - PASSWORD:
+  - SANDBOX_ID
+
+module:
+  source: git::https://github.com/QualiSystemsLab/aws-workshop.git//terraform/aws-document-db
+
+terraform_version: 0.11.11
+
+variables:
+  values:
+    - AWS_REGION: $REGION
+    - USERNAME: $USERNAME
+    - PASSWORD: $PASSWORD
+    - SANDBOX_ID: $SANDBOX_ID
+    - INSERT_DATA: $ADD_ADMIN_USER
+    - DB_NAME: promo-manager
+    - COLLECTION_NAME: users
+    - DATA: "[{'email':'admin','password':'admin'}]"
+
+outputs:
+    - connection_string
+
+permissions:  
+  aws:
+    role_arn: $ROLE_ARN     #role assumed by service
+    external_id: 'colony'

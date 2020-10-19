@@ -1,0 +1,29 @@
+kind: application
+inputs:
+- AZURE_VM_SIZE: Basic_A1
+infrastructure:
+  
+  compute:
+    spec:
+      azure:
+        vm_size: $AZURE_VM_SIZE
+        
+configuration:
+  start:
+    script: ubuntu-command.sh
+  initialization:
+    script: ubuntu.sh
+  healthcheck:
+    timeout: 1000
+    wait_for_ports: 27017
+    
+source:
+  image:    
+    azure_image:
+    - urn: Canonical:UbuntuServer:16.04-LTS:latest
+      username: adminuser
+  os_type: linux
+  
+spec_version: 1
+debugging: 
+  connection_protocol: SSH

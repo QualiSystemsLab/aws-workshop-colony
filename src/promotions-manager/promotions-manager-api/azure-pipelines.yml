@@ -1,0 +1,114 @@
+jobs:
+- job: Build
+  pool:
+    vmImage: 'Ubuntu-16.04'
+
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+    displayName: 'Install Node.js'
+
+  - script: npm install
+    displayName: 'npm install'
+  
+  - script: npm run test:ci
+    displayName: 'Run unit tests'
+
+  # Publish unit tests
+  - task: PublishTestResults@2
+    continueOnError: true
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: './test-output/test-results.xml' 
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+      mergeTestResults: true
+
+  - script: rm -r .git & rm .gitignore & rm azure-pipelines.yml & rm -r test-output & rm -r test
+    displayName: 'Cleanup before creating artifact for release'
+
+  # Zip build output
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+      archiveType: 'tar'
+      tarCompression: 'gz'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/promotions-manager-api.$(Build.BuildId).tar.gz'
+      includeRootFolder: false
+
+  # Publish Build Artifact
+  - task: PublishBuildArtifacts@1
+    inputs:
+      artifactName: 'drop'
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)/'
+
+# - job: PublishLatestArtifactToColony
+#   pool:
+#     vmImage: 'Ubuntu-16.04'
+
+#   steps:
+  
+#   - task: DownloadBuildArtifacts@0
+#     inputs:      
+#       artifactName: 'drop'
+#       downloadPath: '$(System.DefaultWorkingDirectory)/api-drop'
+
+#   # Zip build output
+#   - task: ArchiveFiles@2
+#     displayName: Archive API artifact
+#     inputs:
+#       rootFolderOrFile: '$(System.DefaultWorkingDirectory)/api-drop'
+#       archiveType: 'tar'
+#       tarCompression: 'gz'
+#       archiveFile: '$(System.DefaultWorkingDirectory)/promotions-manager-api.master.tar.gz'
+#       includeRootFolder: false
+
+#   - script: ls -l $(System.DefaultWorkingDirectory)
+#     displayName: 'List DefaultWorkingDirectory'
+#   - script: ls -l $(System.DefaultWorkingDirectory)/api-drop
+#     displayName: 'List api-drop'
+#   - script: ls -l $(System.DefaultWorkingDirectory)/api-drop/drop
+#     displayName: 'List api-drop/drop'
+
+#   # Upload latest artifact to Colony Artifacts repo if on master
+#   - script: az storage file upload --account-key $(AzureStorageSecretKey) --account-name $(AzureStorageAccountName) --share-name artifacts --source $(System.DefaultWorkingDirectory)/promotions-manager-api.master.tar.gz -p latest/promotions-manager-api.master.tar.gz
+#     displayName: Pulblish Artifact to Colony
+
+#   dependsOn: Build    
+#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- job: IntegrationTests
+  pool:
+    vmImage: 'Ubuntu-16.04'
+
+  steps:
+  - task: DownloadBuildArtifacts@0
+    inputs:      
+      artifactName: 'drop'
+      downloadPath: '$(System.DefaultWorkingDirectory)/api-drop'
+
+  # Download latest build artifacts for UI
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'Promotions Manager'
+      pipeline: 'promotions-manager-ui'
+      buildVersionToDownload: 'latestFromBranch'
+      branchName: 'refs/heads/master'
+      artifactName: 'drop'
+      downloadPath: '$(System.DefaultWorkingDirectory)/ui-drop'
+
+  - script: ls -l $(System.DefaultWorkingDirectory)
+    displayName: 'List DefaultWorkingDirectory'
+
+  - script: ls -l $(System.DefaultWorkingDirectory)/api-drop
+    displayName: 'List api-drop'
+
+  - script: ls -l $(System.DefaultWorkingDirectory)/ui-drop
+    displayName: 'List ui-drop'
+    
+    # todo test data?
+
+  dependsOn: Build
+  condition: succeeded()
+ 
