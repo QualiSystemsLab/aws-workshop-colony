@@ -1,7 +1,5 @@
 provider "aws" {
     region     = "${var.AWS_REGION}"
-    access_key = "AKIARPUPBPVXY5TJXEFQ"
-    secret_key = "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"
 }
 
 # Get VPC by sandbox id
