@@ -1,6 +1,12 @@
 import React from 'react';
 import {Button, Form, FormControl, Grid, Row, Col} from 'react-bootstrap';
 
+import { withRouter } from 'react-router-dom';
+
+const globalFont = {
+    fontFamily: 'Comfortaa'
+}
+
 const signUpSection = {
     backgroundColor: '#ecb807',
     margin: '0 -26.8% 0 -26.8%',
@@ -10,13 +16,36 @@ const signUpDiv = {
 }
 
 const signUpHeader = {
-    marginTop: '0'
+    marginTop: '0',
+    color: 'white',
+    textAlign: 'center'
+}
+
+const logoImg = {
+    width: '100px',
+    height: '100px',
+    display: 'flex',
+    justifyContent: 'center',
+
 }
 
 const btnCtaStyle = {
-    margin: '0 0 0 20px',
-    display: 'inline-block'
+    margin: '0 0 0 40px',
+    display: 'inline-block',
+    backgroundColor: '#ecb807'
 }
+
+const myBtn = {
+    backgroundColor: '#ecb807',
+    fontFamily: 'Comfortaa',
+    textTransform: "uppercase",
+    fontSize: '2rem',
+    padding: '5px 15px 5px 15px',
+    borderRadius: '20px',
+    color: 'white',
+    boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.3)'
+}
+
 
 const roundIcon = {
     backgroundColor: '#fff',
@@ -64,63 +93,72 @@ const pricingDiv = {
     padding: '50px 0 80px 0'
 }
 
+const headwelcome = {
+    textAlign: 'center',
+    color: 'rgb(97, 165, 62)'
+}
+
 const Home = () => (
     <div>
-        <h1>Welcome to the Promotions Manager website!</h1>
-        <section style={servicesSection}>
-            <Grid style={servicesGrid}>
-                <Row>
-                    <h5 style={servicesGridH5}>SERVICES</h5>
-                    <h2 style={servicesGridH2}>What We Offer</h2>
-                </Row>
-                <Row>
-                    <Col md={3} mdOffset={1}>
-                        <span style={roundIcon}>              
-                            <i className="glyphicon glyphicon-cloud" aria-hidden="true"></i>
-                        </span>
-                        <h4 style={serviceTitle}>Platforms</h4>
-                        <p style={serviceDescription}>We support all social media platforms</p>
-                    </Col>
-                    <Col md={3}>
-                        <span style={roundIcon}>              
-                            <i className="glyphicon glyphicon-cog" aria-hidden="true"></i>
-                        </span>
-                        <h4 style={serviceTitle}>Functionality</h4>
-                        <p style={serviceDescription}>We have many awesome features</p>
-                    </Col>                    
-                    <Col md={3}>
-                        <span style={roundIcon}>              
-                            <i className="glyphicon glyphicon-heart" aria-hidden="true"></i>
-                        </span>
-                        <h4 style={serviceTitle}>Passion</h4>
-                        <p style={serviceDescription}>Made with love by passionate marketers</p>
-                    </Col>
-                </Row>
-            </Grid>
-        </section>
-        <section>
-            <div style={pricingDiv}>
-                <h1>PRICING</h1>
-                <h3>We offer the most competetive pricing</h3>
-                <Button bsStyle="primary" bsSize="large">Learn More</Button>
-            </div>
-        </section>
-        <section style={signUpSection}>
-            <Grid style={signUpDiv}>
-                <Row>
-                    <Col md={10} mdOffset={2}>
-                        <h2 style={signUpHeader}>Sign up for a FREE trial</h2>
-                        <p>
-                            The Promotions Manager is launching soon. Leave your email at the bottom to get a free 60 days trial whwn we launch.
-                        </p>
-                        <Form inline>
-                            <FormControl type="text" placeholder="Enter your email" />
-                            <div style={btnCtaStyle}><Button bsStyle="primary">Sign me up!</Button></div>
-                        </Form>
-                    </Col>
-                </Row>
-            </Grid>
-        </section>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa"></link>
+        <div style={globalFont}>
+            
+            <h1 style={headwelcome}>Welcome to Gourmet Inc Promotions Manager!</h1>
+            <section style={servicesSection}>
+                <Grid style={servicesGrid}>
+                    <Row>
+                        <h2 style={servicesGridH2}>Services</h2>
+                        <h2 style={servicesGridH2}>What We Offer</h2>
+                    </Row>
+                    <Row>
+                        <Col md={4}>
+                            <span style={roundIcon}>              
+                                <i className="glyphicon glyphicon-cloud" aria-hidden="true"></i>
+                            </span>
+                            <h4 style={serviceTitle}>Platforms</h4>
+                            <p style={serviceDescription}>We support all social media platforms</p>
+                        </Col>
+                        <Col md={4}>
+                            <span style={roundIcon}>              
+                                <i className="glyphicon glyphicon-cog" aria-hidden="true"></i>
+                            </span>
+                            <h4 style={serviceTitle}>Functionality</h4>
+                            <p style={serviceDescription}>We have many awesome features</p>
+                        </Col>                    
+                        <Col md={4}>
+                            <span style={roundIcon}>              
+                                <i className="glyphicon glyphicon-heart" aria-hidden="true"></i>
+                            </span>
+                            <h4 style={serviceTitle}>Passion</h4>
+                            <p style={serviceDescription}>Made with love by passionate marketers</p>
+                        </Col>
+                    </Row>
+                </Grid>
+            </section>
+            <section>
+                <div style={pricingDiv}>
+                    <h1>PRICING</h1>
+                    <h3>We offer the most competitive pricing</h3>
+                    <Button style={myBtn} bsSize="large">Learn More</Button>
+                </div>
+            </section>
+            <section style={signUpSection}>
+                <Grid style={signUpDiv}>
+                    <Row>
+                        <Col>
+                            <h2 style={signUpHeader}>Sign up for a FREE trial</h2>
+                            <p style={signUpHeader}>
+                                The Promotions Manager is launching soon. Leave your email at the bottom to get a free 60 days trial when we launch.
+                            </p>
+                            <Form inline>
+                                <FormControl type="text" placeholder="Enter your email" />
+                                <div style={btnCtaStyle}><Button bsStyle="primary">Sign me up!</Button></div>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Grid>
+            </section>
+        </div>
     </div>
 )
 
