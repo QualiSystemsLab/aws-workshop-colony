@@ -28,7 +28,7 @@
 						"Effect": "Allow",
 						"Resource": {
 							"Fn::Join": ["",
-							["arn:aws:s3:::cloudshell-sandboxes-",
+							["arn:aws:s3:::",
 							{
 								"Ref": "S3BucketName"
 							},
