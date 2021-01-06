@@ -2,7 +2,7 @@ spec_version: 1
 kind: TerraForm
 
 inputs:
-  - REGION: us-east-1
+  - REGION: eu-west-1
   - ROLE_ARN: PowerUserAccess
   - ADD_ADMIN_USER: true
   - USERNAME: 
