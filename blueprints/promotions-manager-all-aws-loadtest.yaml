@@ -5,7 +5,7 @@ metadata:
     All in one deployment of our promotions manager
     
 clouds: 
-  - AWS: eu-west-1
+  - AWS: eu-east-1
   
 artifacts:
   - promotions-manager-ui: artifacts/latest/promotions-manager-ui.master.tar.gz
@@ -22,7 +22,7 @@ inputs:
 applications:
   - promotions-manager-ui:
       #target: vm1
-      #instances: 3
+      instances: 3
       input_values:
         - PORT: $PORT
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
